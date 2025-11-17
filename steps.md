@@ -18,3 +18,5 @@ The third page will have their saved ideas, the generated ideas that were called
 - Created saved_ideas table linked to users with the user_id; stores idea_text.
 
 4. Generated a visual ERD for a better representation of the relationships.
+
+5. Ran the laravel app using the php artisan serve to start building the routes
