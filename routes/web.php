@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', [DocumentController::class, 'showCodeForm'])->name('code.form');
+Route::post('/enter-code', [DocumentController::class, 'enterCode'])->name('code.enter');
+
+Route::get('/dashboard/{code}', [DocumentController::class, 'dashboard'])->name('dashboard');
+
+Route::put('/document/{code}', [DocumentController::class, 'update'])->name('document.update');
+Route::delete('/document/{code}', [DocumentController::class, 'destroy'])->name('document.destroy');
 

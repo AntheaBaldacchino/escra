@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SavedIdea extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_code', 'idea_text'];
+    protected $fillable = ['user_id', 'idea_text'];
 
     public function user() {
 

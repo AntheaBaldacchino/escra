@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +10,11 @@ return new class extends Migration
 {
     public function up():void 
 {
-    Schema::create('documents', function (Blueprint $table) {
+     Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('title');
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
+            $table->string('google_doc_id')->nullable();
             $table->timestamps();
         });
 }
