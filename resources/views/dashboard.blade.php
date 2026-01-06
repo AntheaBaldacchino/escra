@@ -45,9 +45,68 @@
     </div>
   </div>
 
-  <p class="text-muted small mt-3 mb-0">
-    Next: add “Generate Idea” + Saved Ideas page.
-  </p>
+    <div class="d-flex gap-2 mt-3">
+  <button id="generateIdeaBtn" type="button" class="btn btn-success">
+    Generate Idea
+  </button>
+
+  <a class="btn btn-secondary" href="{{ route('ideas.index', ['code' => $user->user_code]) }}">
+    Saved Ideas
+  </a>
 </div>
+
+<div id="ideaCard" class="card shadow border-0 rounded-4 mt-3 d-none">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-start">
+      <div>
+        <h5 class="fw-bold mb-1">Generated Idea</h5>
+        <p class="text-muted mb-3">Edit it if you want, then save it.</p>
+      </div>
+      <button id="skipIdeaBtn" type="button" class="btn btn-outline-secondary btn-sm">
+        Skip
+      </button>
+    </div>
+
+    <form method="POST" action="{{ route('ideas.store', ['code' => $user->user_code]) }}">
+      @csrf
+      <div class="mb-3">
+        <textarea id="ideaText" name="idea_text" class="form-control" rows="3" required></textarea>
+      </div>
+
+      <button class="btn btn-primary">Save Idea</button>
+    </form>
+  </div>
+</div>
+
+</div>
+<script>
+  const ideas = [
+    "Introduce a character who knows the ending from page one.",
+    "Add a small contradiction in the protagonist’s memory that becomes important later.",
+    "Reveal the real villain through an ordinary object that keeps appearing.",
+    "A side character forces the main character to break their own rules.",
+    "The setting changes in subtle ways every chapter, and nobody notices."
+  ];
+
+  const generateBtn = document.getElementById('generateIdeaBtn');
+  const ideaCard = document.getElementById('ideaCard');
+  const ideaText = document.getElementById('ideaText');
+  const skipBtn = document.getElementById('skipIdeaBtn');
+
+  generateBtn.addEventListener('click', () => {
+    const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
+    ideaText.value = randomIdea;
+    ideaCard.classList.remove('d-none');
+    ideaText.focus();
+  });
+
+  skipBtn.addEventListener('click', () => {
+    ideaText.value = '';
+    ideaCard.classList.add('d-none');
+  });
+</script>
+
+
 </body>
+
 </html>
