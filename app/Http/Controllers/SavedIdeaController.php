@@ -41,7 +41,6 @@ class SavedIdeaController extends Controller
 
         $user = User::where('user_code', $code)->firstOrFail();
 
-        // simple ownership check
         abort_unless($idea->user_id === $user->id, 403);
 
         $idea->update(['idea_text' => $request->idea_text]);

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\SavedIdeaController;
+use App\Http\Controllers\AIController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +38,5 @@ Route::post('/{code}/ideas', [SavedIdeaController::class, 'store'])->name('ideas
 Route::put('/{code}/ideas/{idea}', [SavedIdeaController::class, 'update'])->name('ideas.update');
 
 Route::delete('/{code}/ideas/{idea}', [SavedIdeaController::class, 'destroy'])->name('ideas.destroy');
+
+Route::post('/{code}/generate-idea', [AIController::class, 'generate'])->name('ideas.generate');

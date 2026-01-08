@@ -9,7 +9,8 @@ class Document extends Model
 {
    use HasFactory;
 
-    protected $fillable = ['user_id', 'content', 'google_doc_id'];
+    protected $fillable = ['user_id', 'chapter', 'subtitle', 'content', 'google_doc_id'];
+
 
     public function user()
     {

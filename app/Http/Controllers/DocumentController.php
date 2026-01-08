@@ -50,6 +50,9 @@ class DocumentController extends Controller
 
         $document->update([
             'content' => $request->input('content', ''),
+            'chapter' => $request->input('chapter'),
+            'subtitle' => $request->input('subtitle'),
+            
         ]);
 
         return redirect()->route('dashboard', ['code' => $code])
