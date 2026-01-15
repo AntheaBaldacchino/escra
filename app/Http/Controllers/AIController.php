@@ -20,7 +20,10 @@ class AIController extends Controller
         }
 
         $apiKey = env('GEMINI_API_KEY');
-        $model  = env('GEMINI_MODEL', 'gemini-2.5-flash');
+        $model = env('GEMINI_MODEL', 'gemini-1.5-flash');
+        if (!$apiKey) {
+            return response()->json(['error' => 'Missing GEMINI_API_KEY in .env'], 500);
+        }
 
         // Construct prompt
         $prompt = "You are a writing assistant. Based on the text below, return ONE short idea to continue the story. "
@@ -46,12 +49,14 @@ class AIController extends Controller
             ],
         ]);
 
-        if (!$response->successful()) {
+       if (!$response->successful()) {
             return response()->json([
                 'error' => 'AI request failed.',
-                'details' => $response->json(),
+                'status' => $response->status(),
+                'body' => $response->body(),
             ], 500);
         }
+
 
         $data = $response->json();
 

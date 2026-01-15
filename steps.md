@@ -21,3 +21,6 @@ The third page will have their saved ideas, the generated ideas that were called
 6. Created the documentController to accepts the 4-digit code, create the user or finds them with their new or previous document. the controller will also show the dashboard, save, and delete the document. This uses the basis of CRUD.
 
 7. The routes have been added.
+8. The challange I faced was trying to implement and use google docs API. I created a cloud project and account using the 90-day-trial with 300 credits. However, this seemed to be challanging when implementing it in code as the resources weren't enough. 
+
+9. The AIController was easy enough, since there was no need for extra funds from my side as long as i don't jump the quota. I'm using gemini and it was 3 easy steps to set it up.

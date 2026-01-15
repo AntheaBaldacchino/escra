@@ -8,13 +8,40 @@ use Illuminate\Http\Request;
 
 class SavedIdeaController extends Controller
 {
-        public function index(string $code)
-    {
-        $user = User::where('user_code', $code)->firstOrFail();
-        $ideas = SavedIdea::where('user_id', $user->id)->latest()->get();
+   public function index(string $code)
+{
+    $user = User::where('user_code', $code)->firstOrFail();
 
-        return view('saved-ideas', compact('user', 'ideas'));
+    $q = request()->query('q');               
+    $sort = request()->query('sort', 'newest'); 
+
+    $query = SavedIdea::where('user_id', $user->id);
+
+    if ($q) {
+        $query->where('idea_text', 'like', '%' . $q . '%');
     }
+
+    switch ($sort) {
+        case 'oldest':
+            $query->oldest();
+            break;
+        case 'az':
+            $query->orderBy('idea_text', 'asc');
+            break;
+        case 'za':
+            $query->orderBy('idea_text', 'desc');
+            break;
+        case 'newest':
+        default:
+            $query->latest();
+            break;
+    }
+
+    $ideas = $query->get();
+
+    return view('saved-ideas', compact('user', 'ideas', 'q', 'sort'));
+    }
+
 
     public function store(Request $request, string $code)
     {

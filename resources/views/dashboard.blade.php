@@ -375,19 +375,20 @@
   <div class="fab" id="fabBtn" title="Ideas">✿</div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   const fabBtn = document.getElementById('fabBtn');
   const ideaCard = document.getElementById('ideaCard');
   const ideaText = document.getElementById('ideaText');
-  const title = documment.getelementById('chapterTitle');
+  const skipBtn = document.getElementById('skipIdeaBtn');
 
   let isGenerating = false;
 
   async function generateIdea() {
     if (isGenerating) return;
-
     isGenerating = true;
+
     fabBtn.style.opacity = '0.6';
-    fabBtn.innerText = '…';
+    fabBtn.textContent = '…';
 
     try {
       const res = await fetch("{{ route('ideas.generate', ['code' => $user->user_code]) }}", {
@@ -416,19 +417,19 @@
     } finally {
       isGenerating = false;
       fabBtn.style.opacity = '1';
-      fabBtn.innerText = '✿';
+      fabBtn.textContent = '✿';
     }
   }
 
   fabBtn.addEventListener('click', generateIdea);
 
-  // Skip button
-  const skipBtn = document.getElementById('skipIdeaBtn');
   skipBtn.addEventListener('click', () => {
     ideaText.value = '';
     ideaCard.classList.add('d-none');
   });
+});
 </script>
+
 
 
 </body>

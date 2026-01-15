@@ -34,6 +34,43 @@
       </ul>
     </div>
   @endif
+  <div class="card border-0 shadow-sm rounded-4 mb-3">
+  <div class="card-body p-3">
+    <form method="GET" action="{{ route('ideas.index', ['code' => $user->user_code]) }}" class="row g-2 align-items-end">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold mb-1">Search ideas</label>
+        <input
+          type="text"
+          name="q"
+          class="form-control"
+          placeholder="Type a keyword..."
+          value="{{ $q ?? request('q') }}"
+        >
+      </div>
+
+        <div class="col-md-4">
+          <label class="form-label fw-semibold mb-1">Sort by</label>
+          <select name="sort" class="form-select">
+            <option value="newest" {{ ($sort ?? request('sort')) === 'newest' ? 'selected' : '' }}>Newest first</option>
+            <option value="oldest" {{ ($sort ?? request('sort')) === 'oldest' ? 'selected' : '' }}>Oldest first</option>
+            <option value="az"     {{ ($sort ?? request('sort')) === 'az' ? 'selected' : '' }}>A → Z</option>
+            <option value="za"     {{ ($sort ?? request('sort')) === 'za' ? 'selected' : '' }}>Z → A</option>
+          </select>
+        </div>
+
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-primary">Apply</button>
+        </div>
+
+        <div class="col-12">
+          <a class="btn btn-link p-0 text-decoration-none"
+            href="{{ route('ideas.index', ['code' => $user->user_code]) }}">
+            Reset
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Empty state -->
   @if($ideas->count() === 0)
