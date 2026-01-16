@@ -14,8 +14,10 @@ class SavedIdeaController extends Controller
 
     $q = request()->query('q');               
     $sort = request()->query('sort', 'newest'); 
-
+    
     $query = SavedIdea::where('user_id', $user->id);
+    
+
 
     if ($q) {
         $query->where('idea_text', 'like', '%' . $q . '%');

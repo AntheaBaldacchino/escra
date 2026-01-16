@@ -12,7 +12,7 @@ class DocumentController extends Controller
     {
         return view('welcome');
     }
-
+    
     public function enterCode(Request $request)
     {
         $request->validate([

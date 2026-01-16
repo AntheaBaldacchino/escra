@@ -277,7 +277,6 @@
   {{-- Sidebar --}}
   <aside class="sidebar">
     <div class="brand">
-      <div class="logo-placeholder">LOGO</div>
       <p class="brand-name mb-0">Escra</p>
     </div>
 

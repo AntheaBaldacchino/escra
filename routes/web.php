@@ -17,26 +17,26 @@ use App\Http\Controllers\AIController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Landing page (code entry form)
 Route::get('/', [DocumentController::class, 'showCodeForm'])->name('code.form');
 
-Route::post('/enter-code', [DocumentController::class, 'enterCode'])->name('code.enter');
+// Submit code
+Route::post('/workspace', [DocumentController::class, 'enterCode'])->name('code.enter');
 
-Route::get('/dashboard/{code}', [DocumentController::class, 'dashboard'])->name('dashboard');
+// Dashboard
+Route::get('/workspace/{code}', [DocumentController::class, 'dashboard'])->name('dashboard');
 
-Route::put('/document/{code}', [DocumentController::class, 'update'])->name('document.update');
+// Document update
+Route::put('/workspace/{code}/document', [DocumentController::class, 'update'])->name('document.update');
 
-Route::delete('/document/{code}', [DocumentController::class, 'destroy'])->name('document.destroy');
+// Delete workspace (deletes user + doc + ideas)
+Route::delete('/workspace/{code}', [DocumentController::class, 'destroy'])->name('document.destroy');
 
-Route::get('/{code}/ideas', [SavedIdeaController::class, 'index'])->name('ideas.index');
+// Saved Ideas
+Route::get('/workspace/{code}/ideas', [SavedIdeaController::class, 'index'])->name('ideas.index');
+Route::post('/workspace/{code}/ideas', [SavedIdeaController::class, 'store'])->name('ideas.store');
+Route::put('/workspace/{code}/ideas/{idea}', [SavedIdeaController::class, 'update'])->name('ideas.update');
+Route::delete('/workspace/{code}/ideas/{idea}', [SavedIdeaController::class, 'destroy'])->name('ideas.destroy');
 
-Route::post('/{code}/ideas', [SavedIdeaController::class, 'store'])->name('ideas.store');
-
-Route::put('/{code}/ideas/{idea}', [SavedIdeaController::class, 'update'])->name('ideas.update');
-
-Route::delete('/{code}/ideas/{idea}', [SavedIdeaController::class, 'destroy'])->name('ideas.destroy');
-
-Route::post('/{code}/generate-idea', [AIController::class, 'generate'])->name('ideas.generate');
+// AI generate idea
+Route::post('/workspace/{code}/generate-idea', [AIController::class, 'generate'])->name('ideas.generate');
