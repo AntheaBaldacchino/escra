@@ -10,6 +10,7 @@ return new class extends Migration
 {
     public function up():void 
 {
+    // Create documents table
      Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

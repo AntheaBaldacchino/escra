@@ -19,11 +19,14 @@ class User extends Authenticatable
 
     public function document()
     {
+        // User has one Document
         return $this->hasOne(Document::class, 'user_id');
     }
 
     public function savedIdeas()
     {
+        // User has many SavedIdeas
         return $this->hasMany(SavedIdea::class, 'user_id');
     }
+
 }

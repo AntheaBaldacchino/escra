@@ -8,6 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Create saved_ideas table
         Schema::create('saved_ideas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

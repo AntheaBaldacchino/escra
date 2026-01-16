@@ -15,6 +15,7 @@ class DocumentController extends Controller
     
     public function enterCode(Request $request)
     {
+        // Validate code input
         $request->validate([
             'code' => ['required', 'digits:4'],
         ]);
@@ -23,6 +24,7 @@ class DocumentController extends Controller
 
         $user = User::firstOrCreate(['user_code' => $code]);
 
+        // Ensure document exists for user
         Document::firstOrCreate(
             ['user_id' => $user->id],
             ['content' => '', 'google_doc_id' => null]
@@ -41,6 +43,7 @@ class DocumentController extends Controller
 
     public function update(Request $request, string $code)
     {
+        
         $request->validate([
             'content' => ['nullable', 'string'],
         ]);
@@ -48,6 +51,7 @@ class DocumentController extends Controller
         $user = User::where('user_code', $code)->firstOrFail();
         $document = Document::where('user_id', $user->id)->firstOrFail();
 
+        // Update document fields
         $document->update([
             'content' => $request->input('content', ''),
             'chapter' => $request->input('chapter'),
@@ -59,6 +63,7 @@ class DocumentController extends Controller
             ->with('status', 'Document saved.');
     }
 
+    // Destroy
     public function destroy(string $code)
     {
         $user = User::where('user_code', $code)->firstOrFail();

@@ -12,6 +12,7 @@ class SavedIdea extends Model
 
     public function user() {
 
+        // SavedIdea belongs to a User
         return $this->belongsTo(User::class, 'user_id');
     }
 

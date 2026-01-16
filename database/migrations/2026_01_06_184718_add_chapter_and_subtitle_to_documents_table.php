@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Add chapter and subtitle columns to documents table
         Schema::table('documents', function (Blueprint $table) {
             $table->string('chapter')->nullable()->after('id');
             $table->string('subtitle')->nullable()->after('chapter');
@@ -22,6 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Remove chapter and subtitle columns from documents table
         Schema::table('documents', function (Blueprint $table) {
             $table->dropColumn(['chapter', 'subtitle']);
         });

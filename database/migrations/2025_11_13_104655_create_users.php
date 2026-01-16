@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Create users table
+        // Set storage engine to InnoDB for foreign key support
         Schema::create('users', function (Blueprint $table) {
                        $table->engine = 'InnoDB';
             $table->id();
@@ -24,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // DROP users table
         Schema::dropIfExists('users');
     }
 };

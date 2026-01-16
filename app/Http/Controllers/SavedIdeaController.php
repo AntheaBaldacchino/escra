@@ -12,17 +12,20 @@ class SavedIdeaController extends Controller
 {
     $user = User::where('user_code', $code)->firstOrFail();
 
+    // Get query parameters
     $q = request()->query('q');               
     $sort = request()->query('sort', 'newest'); 
-    
+
     $query = SavedIdea::where('user_id', $user->id);
     
 
 
+    // Apply search filter
     if ($q) {
         $query->where('idea_text', 'like', '%' . $q . '%');
     }
 
+    // Apply sorting
     switch ($sort) {
         case 'oldest':
             $query->oldest();
@@ -39,6 +42,7 @@ class SavedIdeaController extends Controller
             break;
     }
 
+    // Get ideas
     $ideas = $query->get();
 
     return view('saved-ideas', compact('user', 'ideas', 'q', 'sort'));
@@ -53,6 +57,7 @@ class SavedIdeaController extends Controller
 
         $user = User::where('user_code', $code)->firstOrFail();
 
+        // Create new saved idea
         SavedIdea::create([
             'user_id' => $user->id,
             'idea_text' => $request->idea_text,
@@ -64,14 +69,17 @@ class SavedIdeaController extends Controller
 
     public function update(Request $request, string $code, SavedIdea $idea)
     {
+
         $request->validate([
             'idea_text' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::where('user_code', $code)->firstOrFail();
 
+        // Ensure idea belongs to user before updating
         abort_unless($idea->user_id === $user->id, 403);
 
+        // Update idea text
         $idea->update(['idea_text' => $request->idea_text]);
 
         return redirect()->route('ideas.index', ['code' => $code])

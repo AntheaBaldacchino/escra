@@ -27,3 +27,5 @@ The third page will have their saved ideas, the generated ideas that were called
 9. The AIController was easy enough, since there was no need for extra funds from my side as long as i don't jump the quota. I'm using gemini and it was 3 easy steps to set it up.
 
 10. The sorting and filtering was applied to the saved-idea cards, where it will be easier for the user to search and filter through them.
+
+11. Added some Comments 

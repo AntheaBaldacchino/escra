@@ -17,7 +17,7 @@ return new class extends Migration
                     ->after('user_id')
                     ->constrained('documents')
                     ->onDelete('cascade');
-        });
+        }); // Drop later
     }
 
     /**
